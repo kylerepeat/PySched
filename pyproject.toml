@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "pysched"
+version = "0.1.0"
+description = "A minimal distributed task scheduling system: scheduler center + workers, SQLite-backed, with cron/interval triggers, retries, timeout and failover."
+authors = ["orangeMoon <orangemoon@example.com>"]
+readme = "README.md"
+packages = [{ include = "pysched" }]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
+fastapi = ">=0.115,<1.0"
+uvicorn = ">=0.32,<1.0"
+httpx = ">=0.28,<1.0"
+pydantic = ">=2.9,<3.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=8.3,<9.0"
+
+[tool.poetry.scripts]
+pysched-scheduler = "pysched.cli:scheduler_main"
+pysched-worker = "pysched.cli:worker_main"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+pythonpath = ["."]
